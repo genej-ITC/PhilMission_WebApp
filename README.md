@@ -4,7 +4,11 @@
 
 ## 휴대폰에서 사용
 
-https://philmission-webapp.goodlake6.chatgpt.site 를 휴대폰에서 엽니다. 기본 연락처를 삭제한 일반 선교 자료를 로그인 없이 공개합니다. 카카오톡·ChatGPT 안의 브라우저 대신 Android는 Chrome, iPhone은 Safari를 직접 실행해 주소를 붙여 넣으세요.
+**GitHub Pages:** https://genej-itc.github.io/PhilMission_WebApp/
+
+**기존 주소:** https://philmission-webapp.goodlake6.chatgpt.site
+
+위 주소 중 하나를 휴대폰에서 엽니다. 기본 연락처를 삭제한 일반 선교 자료를 로그인 없이 공개합니다. 카카오톡·ChatGPT 안의 브라우저 대신 Android는 Chrome, iPhone은 Safari를 직접 실행해 주소를 붙여 넣으세요.
 
 - **안드로이드:** Chrome 앱 직접 실행 → 메뉴(⋮) → 설치 및 바로가기 만들기 → 설치. 버전에 따라 앱 설치 / 홈 화면에 추가로 표시됩니다.
 - **아이폰:** Safari → 공유 → 홈 화면에 추가.
@@ -70,3 +74,11 @@ Android Chrome 크기와 iPhone WebKit 크기의 자동 테스트에서 자료 �
 ## 설치 아이콘 재실행 오류 수정
 
 `index.html`을 첫 화면 `/`로 이동시키는 호스팅에서 이동 응답을 캐시했다가 반환하면 Chrome이 `ERR_FAILED`를 발생시킵니다. 정규 첫 화면을 캐시하고 이동 응답을 정규화하도록 수정했습니다. 서비스 워커 코드가 바뀌면 캐시 버전도 바뀌고 새 캐시 준비 후 즉시 활성화되어 이전 캐시를 정리합니다. 브라우저 자료 삭제 없이 업데이트할 수 있습니다.
+
+## GitHub Pages 자동 배포
+
+`.github/workflows/pages.yml`이 main 브랜치 푸시 때마다 의존성 설치 → 자료 검증 → dist 빌드 → GitHub Pages 배포를 수행합니다. 저장소 Settings → Pages의 Source는 GitHub Actions입니다. Actions 탭에서 수동 실행도 가능합니다. GitHub Pages는 별도 로그인 없이 사용할 수 있는 정적 호스팅 주소입니다.
+
+설치 안내는 `설치안내.txt`를 전달하면 됩니다. TXT는 앱을 담은 설치 파일이 아니라 접속 주소와 설치 방법을 안내합니다. 저장소의 소스 열람 주소와 실제 앱 주소는 서로 다릅니다.
+
+두 배포 주소의 개인 자료는 브라우저에서 서로 다른 저장 공간을 사용합니다. 주소를 바꾸면 기존 앱에서 설정 → 백업 저장을 한 뒤 새 앱에서 백업 복원으로 자료를 옮기세요. 기존 주소도 계속 사용할 수 있습니다. 어느 주소도 영구 가동을 보장하지는 않으며, GitHub Pages는 기존 호스팅과 별도로 제공하는 대체 접속 경로입니다.
