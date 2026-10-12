@@ -16,9 +16,11 @@ await cp(path.join(pdf,'standard_fonts'),path.join(dist,'vendor/standard_fonts')
 await copyFile(path.join(pdf,'LICENSE'),path.join(dist,'vendor/PDFJS-LICENSE.txt'));
 const names=['index.html','styles.css','app.mjs','core.mjs','storage.mjs','content.json','manifest.webmanifest','assets/church-logo.png','assets/icon-192.png','assets/icon-512.png','vendor/pdf.mjs','vendor/pdf.worker.mjs'];
 const hash=crypto.createHash('sha256');for(const f of names)hash.update(await readFile(path.join(dist,f)));
+const swSource=await readFile(path.join(root,'public/sw.js'),'utf8');
+hash.update(swSource);
 const version=hash.digest('hex').slice(0,14);
 const extra=[];for(const folder of ['cmaps','standard_fonts'])for(const file of await readdir(path.join(dist,'vendor',folder)))extra.push('vendor/'+folder+'/'+file);
-let sw=await readFile(path.join(root,'public/sw.js'),'utf8');sw=sw.replace('__BUILD_VERSION__',version).replace('__EXTRA_FILES__',JSON.stringify(extra));
+let sw=swSource;sw=sw.replace('__BUILD_VERSION__',version).replace('__EXTRA_FILES__',JSON.stringify(extra));
 await writeFile(path.join(dist,'sw.js'),sw);
 await writeFile(path.join(dist,'build-info.json'),JSON.stringify({version,builtAt:new Date().toISOString()}));
 console.log('Built offline PWA:',version);

@@ -40,14 +40,14 @@ PC 브라우저: `http://localhost:4173`. `dist/index.html`을 더블클릭해�
 
 ## 안드로이드·아이폰 공통 배포
 
-`npm run build` 후 **dist 폴더 전체**를 HTTPS 정적 호스팅에 배포합니다. Netlify 수동 업로드 등에서 dist를 업로드할 수 있고, Vercel은 프로젝트 루트에서 CLI로 배포하거나 연결한 저장소에 비공개 content.json을 안전하게 공급하여 빌드합니다. `vendor`와 `sw.js`를 제외하면 오프라인 PDF 기능이 깨집니다. `vercel.json`에 빌드 설정이 포함되어 있습니다. `tools/package.mjs`는 공유 가능한 ZIP을 만듭니다.
+`npm run build` 후 **dist 폴더 전체**를 HTTPS 정적 호스팅에 배포합니다. Netlify 수동 업로드 등에서 dist를 업로드할 수 있고, Vercel은 프로젝트 루트에서 CLI로 배포하거나 연결한 저장소의 공개용 content.json을 함께 빌드합니다. `vendor`와 `sw.js`를 제외하면 오프라인 PDF 기능이 깨집니다. `vercel.json`에 빌드 설정이 포함되어 있습니다. `tools/package.mjs`는 공유 가능한 ZIP을 만듭니다.
 
 ```powershell
 npm run build
 node tools/package.mjs
 ```
 
-결과: `PhilMission_WebApp-dist.zip`. APK/IPA 설치 파일이 아닌 HTTPS 호스팅용 배포 파일입니다. 업데이트는 새 dist를 같은 주소에 덮어씌운 뒤 앱 → 설치·오프라인 → 업데이트 확인에서 적용합니다. IndexedDB 자료는 앱 업데이트 시 유지됩니다.
+결과: `PhilMission_WebApp-dist.zip`. APK/IPA 설치 파일이 아닌 HTTPS 호스팅용 배포 파일입니다. 업데이트는 새 dist를 같은 주소에 덮어씌운 뒤 앱을 온라인으로 다시 열면 새 오프라인 캐시 준비 후 자동 적용합니다. 설치·오프라인 → 업데이트 확인에서도 확인할 수 있습니다. IndexedDB 자료는 앱 업데이트 시 유지됩니다.
 
 ## 선택적 자동 번역 서버
 
@@ -66,3 +66,7 @@ npm run test:e2e
 ```
 
 Android Chrome 크기와 iPhone WebKit 크기의 자동 테스트에서 자료 열기, 언어 전환, 즐겨찾기/연락처 유지, 이미지·2페이지 PDF 등록/열기, 백업·복원을 검증합니다. Android Chrome에서는 오프라인 재접속도 통과했습니다. Windows Playwright WebKit은 네트워크 단절 후 재시작 시 엔진 내부 오류가 있어 Safari에서는 캐시 준비와 로컬 자료 열기까지 검증했습니다. 실제 아이폰의 오프라인 재시작은 추가 확인이 필요합니다. 이는 실제 아이폰의 설치·마이크 검증을 대신하지 않습니다. 세부 범위는 FEATURE_PARITY.md를 참고하세요.
+
+## 설치 아이콘 재실행 오류 수정
+
+`index.html`을 첫 화면 `/`로 이동시키는 호스팅에서 이동 응답을 캐시했다가 반환하면 Chrome이 `ERR_FAILED`를 발생시킵니다. 정규 첫 화면을 캐시하고 이동 응답을 정규화하도록 수정했습니다. 서비스 워커 코드가 바뀌면 캐시 버전도 바뀌고 새 캐시 준비 후 즉시 활성화되어 이전 캐시를 정리합니다. 브라우저 자료 삭제 없이 업데이트할 수 있습니다.
