@@ -1,0 +1,3 @@
+﻿import {spawnSync} from 'node:child_process';import {fileURLToPath} from 'node:url';import path from 'node:path';
+const root=fileURLToPath(new URL('../',import.meta.url)),destination=path.join(root,'PhilMission_WebApp-dist.zip');
+const result=process.platform==='win32'?spawnSync('powershell',['-NoProfile','-Command',`Compress-Archive -Path '${root.replaceAll("'","''")}dist/*' -DestinationPath '${destination.replaceAll("'","''")}' -Force`],{stdio:'inherit'}):spawnSync('python3',['-c','import shutil,sys; shutil.make_archive(sys.argv[1],"zip",sys.argv[2])',destination.slice(0,-4),path.join(root,'dist')],{stdio:'inherit'});if(result.status!==0)process.exit(result.status||1);console.log(destination);

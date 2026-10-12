@@ -1,0 +1,1 @@
+{"name":"philmission-webapp","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"node tools/server.mjs","build":"node tools/build.mjs","start":"node tools/server.mjs --dist","test":"node --test tests/*.test.mjs","test:e2e":"playwright test"},"dependencies":{"pdfjs-dist":"4.10.38"},"devDependencies":{"@playwright/test":"1.61.1"}}

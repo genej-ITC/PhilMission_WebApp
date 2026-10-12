@@ -1,0 +1,11 @@
+﻿node_modules/
+dist/
+.openai/*credential*
+.env
+.env.*
+!.env.example
+public/content.json
+playwright-report/
+test-results/
+*.zip
+__pycache__/

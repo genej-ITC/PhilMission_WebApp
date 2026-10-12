@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "필리핀 선교",
+  "short_name": "필리핀 선교",
+  "description": "오프라인 예배·회화·전도와 현장 자료",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#246454",
+  "background_color": "#f6f8f5",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
