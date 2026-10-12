@@ -1,6 +1,12 @@
 ﻿export const categories = {all:'전체', greeting:'인사·자기소개', children:'어린이 사역', meal:'배식·식사', visit:'심방·위로', emergency:'응급·병원'};
 export const defaults = () => ({version:1, language:'tl', fontStep:1, keepAwake:true, favorites:[], contacts:[], overrides:{}});
 export function escapeHTML(value='') { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+export function googleTranslationURL(from,to,text='',android=false) {
+ const url='https://translate.google.com/?'+new URLSearchParams({sl:from,tl:to,text,op:'translate',hl:'ko'});
+ // The Translate Android app can discard the web link's language parameters.
+ // Explicitly address Chrome; keep the HTTPS URL as the browser fallback.
+ return android?`intent://${url.slice('https://'.length)}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${encodeURIComponent(url)};end`:url;
+}
 export function matches(phrase, query='') { const q=query.trim().toLocaleLowerCase();return !q || [phrase.ko,phrase.tl,phrase.en].some(x=>x.toLocaleLowerCase().includes(q)); }
 export function filterPhrases(phrases, query, category, favoritesOnly, favorites) { return phrases.filter(p=>matches(p,query) && (category==='all'||p.category===category) && (!favoritesOnly||favorites.includes(p.id))); }
 export function normalizeYoutube(input) {
