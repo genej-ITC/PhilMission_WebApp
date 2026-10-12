@@ -8,7 +8,7 @@ const translationApiEnabled=document.querySelector('meta[name="translation-api-e
 const rootRoutes=['worship','phrases','evangelism','more'];
 const btn=(label,action,extra='')=>`<button data-action="${action}" ${extra}>${label}</button>`;
 const link=(title,target,sub='')=>`<button class="card link" data-go="${e(target)}"><span class="arrow" aria-hidden="true">›</span><strong>${e(title)}</strong>${sub?`<p>${e(sub)}</p>`:''}</button>`;
-function googleTranslateLink(){const android=/Android/i.test(navigator.userAgent),url=googleTranslationURL('ko',state.language,'',android);return `<a class="card link" href="${e(url)}" target="${android?'_self':'_blank'}" rel="noopener noreferrer"><span class="arrow" aria-hidden="true">↗</span><strong>Google 번역 열기</strong><p>한국어 ↔ ${state.language==='tl'?'따갈로그어':'영어'} · ${android?'Chrome에서 열기':'새 창으로 열기'}</p></a>`;}
+function googleTranslateLink(){const url=googleTranslationURL('ko',state.language);return `<a class="card link" href="${e(url)}" target="_blank" rel="noopener noreferrer"><span class="arrow" aria-hidden="true">↗</span><strong>Google 번역 열기</strong><p>한국어 ↔ ${state.language==='tl'?'따갈로그어':'영어'} · 앱 또는 웹으로 열기</p></a>`;}
 const empty=text=>`<div class="empty">${e(text)}</div>`;
 function toast(text){const t=document.querySelector('#toast');t.textContent=text;t.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.display='none',3000);}
 function stopSpeech(){speechToken++;if(recognizer){recognizer.onend=recognizer.onerror=recognizer.onresult=null;recognizer.abort();recognizer=null;}}
