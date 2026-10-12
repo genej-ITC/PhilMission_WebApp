@@ -1,6 +1,6 @@
 # 최종 Android 소스와 웹앱 기능 대조
 
-기준: `PhilMission/app/src/main/java/org/philmission/app`의 MainActivity, Screens, Viewers, UserSongs, UserStore, Translate, Content 및 현재 assets/content.json. 생성 시 Android JSON을 그대로 사용하며 단위 테스트로 바이트 일치를 확인합니다.
+기준: `PhilMission/app/src/main/java/org/philmission/app`의 MainActivity, Screens, Viewers, UserSongs, UserStore, Translate, Content 및 현재 assets/content.json. Android 자료 중 기본 연락처를 제외한 내용을 그대로 사용하며 단위 테스트로 내용 일치를 확인합니다. 사용자 요청으로 기본 연락처는 공개용 자료에서 삭제했습니다.
 
 | 기능 | 웹앱 구현 | 차이·검증 범위 |
 |---|---|---|
@@ -14,7 +14,7 @@
 | 선교 일정 | 구현 | 사용자 PDF 등록·교체·삭제; 기본 PDF 없음 |
 | 예배 순서 | 구현 | 사용자 PDF/JPG/PNG 등록·교체·삭제; 기본 이미지 없음 |
 | PDF 페이지 이동·확대, 이미지 확대 | 구현 | PDF.js와 CMap/표준 폰트까지 오프라인 캐시 |
-| 기본 연락처 수정·원복, 개인 연락처 CRUD, 전화·복사 | 구현 | 전화는 tel 링크로 시스템 전화 앱에 연결 |
+| 개인 연락처 CRUD, 전화·복사 | 구현 | 기본 연락처는 삭제. 전화는 tel 링크로 시스템 전화 앱에 연결 |
 | 글자 크기 3단계, 읽는 동안 화면 유지 | 구현 | 화면 유지 API 지원 여부에 의존 |
 | 한국어 ↔ 따갈로그어/영어 음성 인식 | 브라우저 방식 | Web Speech 지원·마이크 권한·언어 지원 필요 |
 | ML Kit 임의 문장 번역 | 대체 연결 | ML Kit 웹 모델을 제공하지 않음. 내장 문장 오프라인 조회 + 선택적 Google Cloud 서버 + Google 번역 연결. 기본 배포의 임의 문장 자동 번역은 미설정 |
@@ -23,4 +23,4 @@
 
 네이티브 소스를 자동 변환한 것이 아니라 동일 자료와 주요 동작을 웹으로 재구현했습니다. Android와 iPhone 모두 배포 가능한 하나의 PWA이며 APK/IPA가 아닙니다. 실제 폰의 홈 화면 설치·음성 인식·장시간 저장 유지 여부는 기기에서 추가 확인해야 합니다.
 
-검증 결과: Node 단위 테스트 7개, Android Chrome 및 iPhone 크기 WebKit 흐름 테스트 각 1개 통과. WebKit의 Windows 자동화 환경에서는 오프라인 재시작이 내부 오류로 지원되지 않아 해당 단계는 Chrome에서 검증했고, WebKit은 오프라인 캐시 준비 상태·파일 저장·PDF 렌더링·백업 복원을 검증했습니다. 실제 iPhone Safari 검증은 미실시입니다.
+검증 결과: Node 단위 테스트 8개, Android Chrome 및 iPhone 크기 WebKit 흐름 테스트 각 1개 통과. WebKit의 Windows 자동화 환경에서는 오프라인 재시작이 내부 오류로 지원되지 않아 해당 단계는 Chrome에서 검증했고, WebKit은 오프라인 캐시 준비 상태·파일 저장·PDF 렌더링·백업 복원을 검증했습니다. 실제 iPhone Safari 검증은 미실시입니다.

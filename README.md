@@ -1,12 +1,12 @@
 # PhilMission WebApp
 
-안드로이드 `PhilMission`의 최종 소스와 동일한 선교 자료를 사용하는 설치형 웹앱(PWA)입니다. **Flutter나 React Native가 아니라 HTML/CSS/JavaScript 웹앱**이며, Chrome과 Safari에서 같은 앱을 사용합니다.
+안드로이드 `PhilMission`의 최종 소스의 선교 자료를 사용하는 설치형 웹앱(PWA)입니다. **Flutter나 React Native가 아니라 HTML/CSS/JavaScript 웹앱**이며, Chrome과 Safari에서 같은 앱을 사용합니다.
 
 ## 휴대폰에서 사용
 
-HTTPS로 배포한 주소를 휴대폰에서 엽니다.
+https://philmission-webapp.goodlake6.chatgpt.site 를 휴대폰에서 엽니다. 기본 연락처를 삭제한 일반 선교 자료를 로그인 없이 공개합니다. 카카오톡·ChatGPT 안의 브라우저 대신 Android는 Chrome, iPhone은 Safari를 직접 실행해 주소를 붙여 넣으세요.
 
-- **안드로이드:** Chrome → 메뉴(⋮) → 앱 설치 / 홈 화면에 추가.
+- **안드로이드:** Chrome 앱 직접 실행 → 메뉴(⋮) → 설치 및 바로가기 만들기 → 설치. 버전에 따라 앱 설치 / 홈 화면에 추가로 표시됩니다.
 - **아이폰:** Safari → 공유 → 홈 화면에 추가.
 - 처음에는 인터넷에 연결하고, 더보기 → 설치·오프라인에서 “기본 자료가 저장되었습니다”를 확인합니다. 이후 기본 예배·회화·전도 자료와 등록한 PDF·사진을 오프라인으로 읽을 수 있습니다.
 - 별도의 APK/IPA, Mac, Apple 개발자 계정은 필요하지 않습니다. 설치 대상은 웹 주소입니다.
@@ -30,14 +30,13 @@ Node.js 20 이상과 Python 3을 사용합니다.
 ```powershell
 cd C:\Claude\PRJ\PhilMission_WebApp
 npm ci
-python tools/sync-content.py
 npm run build
 npm run dev
 ```
 
 PC 브라우저: `http://localhost:4173`. `dist/index.html`을 더블클릭해서 여는 방식은 지원하지 않습니다. 개발 서버는 기본적으로 PC에서만 접속할 수 있습니다. **휴대폰에서 설치·마이크·오프라인 기능까지 확인하려면 HTTPS 배포 주소를 사용하세요.**
 
-`public/content.json`은 Android 자산을 그대로 복사하며, 개인 자료이므로 Git에서는 제외합니다. 이 파일이 없으면 빌드할 수 없습니다. Android 폴더가 없는 PC에서는 해당 파일을 안전하게 별도로 전달받아 같은 위치에 넣습니다. 공개 Git 저장소에 선교 문서·연락처를 무심코 올리지 않도록 주의하세요. 배포물에는 실제 내용이 포함되므로 배포 주소의 접근 범위도 확인해야 합니다.
+`public/content.json`은 기본 연락처를 삭제한 공개용 선교 자료이며 저장소에 포함됩니다. 새 PC에서도 Android 폴더 없이 빌드할 수 있습니다. `tools/sync-content.py`로 Android 자료를 갱신할 때와 빌드할 때 모두 기본 연락처를 제거하여 재포함을 방지합니다. 개인 연락처와 사용자가 등록한 파일은 각 브라우저에만 저장됩니다.
 
 ## 안드로이드·아이폰 공통 배포
 

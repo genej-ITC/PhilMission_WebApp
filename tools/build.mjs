@@ -1,8 +1,11 @@
+import {publicContent} from '../src/public-content.mjs';
 import {mkdir,copyFile,cp,readFile,writeFile,readdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';import path from 'node:path';import crypto from 'node:crypto';
 const root=fileURLToPath(new URL('..',import.meta.url)),dist=path.join(root,'dist');
 await mkdir(dist,{recursive:true});
 await cp(path.join(root,'public'),dist,{recursive:true});
+const content=publicContent(JSON.parse(await readFile(path.join(root,'public/content.json'),'utf8')));
+await writeFile(path.join(dist,'content.json'),JSON.stringify(content,null,2)+'\n');
 for(const file of ['app.mjs','core.mjs','storage.mjs'])await copyFile(path.join(root,'src',file),path.join(dist,file));
 await mkdir(path.join(dist,'vendor'),{recursive:true});
 const pdf=path.join(root,'node_modules/pdfjs-dist');
